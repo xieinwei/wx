@@ -1,0 +1,13 @@
+index 首页
+login 登录
+register 注册
+forget 忘记密码
+loan 在线贷款
+apply 流程进度
+mation 金融信息
+query 网点查询
+account 我的账户
+feedback 客服反馈
+loan-list贷款列表页
+loan-details 贷款详情页
+users 登录后的用户页面

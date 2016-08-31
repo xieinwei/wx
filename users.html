@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>用户登录</title>
+    <link type="text/css" href="css/red.css" rel="stylesheet">
+    <script type="text/javascript" src="js/zepto.js"></script>
+</head>
+<body>
+<header id="nav">
+    <div class="nav_in">
+        <section id="headnav" style="z-index:9999">
+            <div class="nav_back">
+                <i class="icon iconfont fanhui"><</i>
+                <a href="javascript:history.go(-1);" class="prepage" id="lnkBack">
+                    返 回</a>
+            </div>
+        </section>
+        <section style="position:relative">
+            <span style="text-align:center;font-size:18px">用户登录</span>
+        </section>
+
+        <section>
+            <a href="index.html">
+                <img alt="" width="31px" height="31px" border="0" src="images/homepage.jpg">
+            </a>
+        </section>
+
+    </div>
+</header>
+
+
+<!-- ####################用户登录的情况下 开始#################### -->
+<div class="conlock">欢迎 李俊松,您已经登录。</div>
+
+<section class="newapplybtn" style="margin-top:10px;">
+
+    <div class="bottombtn">
+        <a href="loan-list.html">
+            <div><input type="submit" value="申贷产品列表" onClick="javascript:return ChecePage();">
+            </div>
+        </a>
+    </div>
+
+    <div class="bottombtn">
+        <a href="loan.html">
+            <div><input type="submit" value="我要申贷" onClick="javascript:return ChecePage();">
+            </div>
+        </a>
+    </div>
+
+    <div class="bottombtn">
+        <a href="apply.html">
+            <div><input type="submit" value="申贷进度" onClick="javascript:return ChecePage();">
+            </div>
+        </a>
+    </div>
+
+    <div class="bottombtn">
+        <a href="feedback.html">
+            <div><input type="submit" value="留言反馈" onClick="javascript:return ChecePage();">
+            </div>
+        </a>
+    </div>
+    <div class="bottombtn">
+        <a href="index.html">
+            <div><input type="submit" value="立即退出" onClick="javascript:return ChecePage();">
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- ####################用户登录的情况下 结束#################### -->
+
+
+
+
+
+<script type="text/javascript">
+    function ShowErrmsg(errmsg) {
+        $("#errmsg").show();
+        $("#errmsg").html("<em>!</em>" + errmsg);
+    }
+    // 验证手机号码
+    function isPhone(num){
+        // 小于11位 false
+        if (num.length < 11 ) return false;
+        var phoneMatch = /^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8]))\d{8}$/;
+        if(phoneMatch.test(num)) return true;
+        return false;
+    }
+</script>
+<script type="text/javascript">
+    function ChecePage() {
+        try {
+            var mobile = $.trim($("#mobile").val());
+            var mobilepass = $.trim($("#mobilepass").val());
+            if(!isPhone(mobile)){
+                ShowErrmsg("请准确输入手机号码");
+                return false;
+            }else if(mobilepass==""){
+                ShowErrmsg("请输入密码");
+                return false;
+            }
+            return true;
+        } catch (exc) { }
+    }
+
+    function successQueryOldNew() {
+
+    }
+    function successSMSCode() {
+
+    }
+
+    function pageAjaxFail(message) { ShowErrmsg(message); }
+    function changeCityFlag() { } //do nothing,used by CmbAddrmob.js
+
+
+
+</script>
+
+
+
+<footer>
+    <div>
+        三峡农商银行版权所有 ICP许可证号&nbsp;鄂B2-20040497
+    </div>
+</footer>
+</body>
+</html>

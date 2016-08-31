@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>忘记密码</title>
+    <link type="text/css" href="css/red.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <script type="text/javascript" src="js/zepto.js"></script>
+</head>
+<body>
+
+<header id="nav">
+    <input type="hidden" id="rtnUrl" value="?EncryptClientNo=">
+    <div class="nav_in">
+        <section id="headnav">
+
+            <div class="nav_back">
+                <span><em></em></span>
+                <a href="javascript:history.go(-1);" class="prepage" id="lnkBack">
+                    返 回</a>
+            </div>
+
+        </section>
+        <section>
+            <span>找回密码</span>
+        </section>
+        <!--section><img alt="" width="31px" height="31px" border="0" src="images/LOGO.png"></section-->
+
+    </div>
+</header>
+
+<form name="aspnetForm" method="post" action="http://www.sanxb.net/index.php/user/resetpassword" id="aspnetForm">
+    <section class="consection" style="padding:10px;line-height: 23px; display:none;">
+        <h3 style="font-size:14px; font-weight:bold; text-align:center;">招商银行信用卡（个人卡）</h3>
+        明星信用卡，招行粉丝的最爱！<br>1）预借现金 随地可取<br>2）万家商户 优遍天下 <br>3）积分永久有效 <br>4）五重安全保障
+    </section>
+
+    <!--div style="margin:17px 1px 0; font-size:14px; text-align:center;display:;">您正在申请的是招商银行信用卡</div-->
+    <div class="conlock">请验证注册手机号码以便于找回密码。</div>
+
+    <section class="consection">
+
+        <div class="incondiv cardid">
+            <span><i>* </i>手机号：</span>
+            <div> <input name="mobile" type="text" id="mobile" maxlength="11" pattern="[0-9]*"> </div>
+        </div>
+
+        <div class="incondiv cardid" id="NotNewDiv" style="display:none;">
+            <div class="conmsg" id="topconmsg"><em>!</em>抱歉，您是已持卡客户，暂不能通过手机申请，请使用电脑登陆我行官网办理。</div>
+        </div>
+        <div id="DivSMSCode" class="incondiv cardid">
+            <span><i>* </i>图形验证码：</span>
+            <div> <input name="captchaCode" type="text" id="captchaCode" maxlength="6" autocomplete="off"> </div>
+            <div style="padding-right:5px;-webkit-box-flex: 0; width:90px;" id="DivSMSBtn" onClick="reloadcode()">
+                <img src="js/captcha" id="captchaimg" style="padding-top:5px;">
+            </div>
+        </div>
+        <div class="incondiv cardid">
+            <span><i>* </i>短信验证码：</span>
+            <div> <input name="SMSCode" type="text" id="SMSCode" maxlength="6" pattern="[0-9]*"> </div>
+            <div style="padding-right:5px;-webkit-box-flex: 0; width:90px;" >
+                <input type="button" id="btnNewSendSMS" value="获取验证码" style="font-size:14px;"></div>
+        </div>
+    </section>
+
+    <div class="conmsg" id="errmsg" style="display:none;"><em>!</em>asdsad</div>
+    <section class="newapplybtn" style="margin-top:10px;">
+        <div class="bottombtn">
+            <div><input type="submit" name="submit" id="submit" value="立即找回" onClick="javascript:return ChecePage();"></div>
+        </div>
+
+    </section>
+</form>
+
+
+<script type="text/javascript">
+
+
+    function start_sms_button(obj){
+        var count = 1 ;
+        var sum = 120;
+        var i = setInterval(function(){
+            if(count > 120){
+                obj.attr('disabled',false);
+                //obj.removeAttr(disabled);
+                obj.val('发送验证码');
+                clearInterval(i);
+            }else{
+                obj.val('剩余'+parseInt(sum - count)+'秒');
+            }
+            count++;
+        },1000);
+    }
+
+    $(function(){
+        //发送验证码
+        $('#btnNewSendSMS').click(function(){
+            $("#errmsg").hide();
+            var phone_obj = $('input[name="mobile"]');
+            var send_obj = $('input#btnNewSendSMS');
+            var val = phone_obj.val();
+            if(val){
+                if(checkcaptcha()){
+                    if(isPhone(val)){
+                        send_obj.attr('disabled',"disabled");
+                        //120秒后重新启动发送按钮
+                        start_sms_button(send_obj);
+                        //alert(2);
+                        $.ajax({
+                            url:"http://www.sanxb.net/index.php/api/loan/sendsmscodetest",
+                            data:{'mobile':val},
+                            dataType:'json',
+                            type:'post',
+                            success:function(data){
+                                if(data.code != 1){
+                                    showMsg(data.message);
+                                }
+                                //alert(data);
+                            }
+                        });
+                    }else{
+                        ShowErrmsg("手机号的格式错误");
+                    }
+
+                }else{
+                    ShowErrmsg('验证码错误');
+                }
+
+            }else{
+                ShowErrmsg('手机号不能为空');
+            }
+        });
+    });
+
+
+
+    function ShowErrmsg(errmsg) {
+        $("#errmsg").show();
+        $("#errmsg").html("<em>!</em>" + errmsg);
+    }
+    //验证身份证
+    function isCardNo(card)
+    {
+        // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if(reg.test(card) === false)
+        {
+            return  false;
+        }
+        return  true;
+    }
+    //验证姓名
+    function isChinese(s)
+    {
+        var patrn = /^\s*[\u4e00-\u9fa5]{1,15}\s*$/;
+        if(!patrn.exec(s))
+        {
+            return false;
+        }
+        return true;
+    }
+    //校验手机号码：必须以数字开头 18开头有BUG
+    function isMobile(s)
+    {
+        var patrn=/^\s*(15\d{9}|13[0-9]\d{8})\s*$/;
+        if(!patrn.exec(s))
+        {
+            return false;
+        }
+        return true;
+    }
+    // 验证手机号码
+    function isPhone(num){
+        // 小于11位 false
+        if (num.length < 11 ) return false;
+        var phoneMatch = /^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8]))\d{8}$/;
+        if(phoneMatch.test(num)) return true;
+        return false;
+    }
+    //数字
+    function isNumber(s)
+    {
+        var patrn = /^\s*\d+\s*$/;
+        //var patrn1=/^\s*\d{16}[\dxX]{2}\s*$/;
+        if(!patrn.exec(s))
+        {
+            return false;
+        }
+        return true;
+    }
+
+
+    //检测用户名是否占用
+    function checkusermobile(){
+        var mobile = $.trim($("#mobile").val());
+        if(!isPhone(mobile)){
+            ShowErrmsg("请准确输入11位手机号码。");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "http://www.sanxb.net/index.php/api/loan/check_username",
+            data: "opt=ajax&mobile="+mobile,
+            success: function(msg){
+                // alert(msg);
+                if(msg=='9'){
+                    return true;
+                }else{
+                    ShowErrmsg("号码已被注册");
+                    //alert("号码已被注册");
+                    return false;
+                }
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                return false;
+            }
+
+        });
+    }
+
+
+
+
+
+    //刷新验证码
+    function reloadcode(){
+        var verify=$("#captchaimg");
+        verify.attr('src','http://www.sanxb.net/index.php/api/loan/captcha/'+Math.random());
+    }
+</script>
+<script type="text/javascript">
+
+    function ChecePage() {
+        $("#errmsg").hide();
+//http://blog.csdn.net/lmb20056127/article/details/6728869
+
+        var mobile = $.trim($("#mobile").val());
+        var SMSCode = $.trim($("#SMSCode").val());
+        var yzmcode = $.trim($("#captchaCode").val());
+
+        if(!isPhone(mobile)){
+            ShowErrmsg("请准确输入11位手机号码。");
+            return false;
+        }else if(yzmcode==""){
+            ShowErrmsg("请准确输入图形验证码。");
+            return false;
+        }else if(!checkcaptcha()){
+            ShowErrmsg("图片验证码错误。");
+            return false;
+        }else if(!SMSCodeCheck()){
+            ShowErrmsg("请准确输入短信验证码。。");
+            return false;
+        }
+        return true;
+    }
+
+
+    //ajax 检查图形验证码
+    function checkcaptcha(){
+        var yzmcode = $.trim($("#captchaCode").val());
+        var bol = false;
+        if(yzmcode==""){
+            ShowErrmsg("图片验证码不能为空");
+            return bol;
+        }
+        $.ajax({
+            type: "POST",
+            url: "http://www.sanxb.net/index.php/api/loan/checkcaptcha",
+            async: false,
+            data: "opt=ajax&yzmcode="+yzmcode,
+            success: function(msg){
+                if(msg=='9'){
+
+                    bol = true;
+
+                }else{
+                    ShowErrmsg("验证码错误");
+                    reloadcode();//刷新验证码
+                    //$.trim($("#captchaCode").attr("value",'');//清空内容
+                }
+            },
+        });
+        return bol;
+    }
+
+    //ajax 检查短信验证码
+    function SMSCodeCheck(){
+        var smscode=$.trim($("#SMSCode").val());
+        var bol = false;
+        if(smscode==""){
+            ShowErrmsg("短信验证码不能为空");
+            return bol;
+        }
+        $.ajax({
+            type: "POST",
+            url: "http://www.sanxb.net/index.php/api/loan/smscodecheck",
+            async: false,
+            data: "opt=ajax&smscode="+smscode,
+            success: function(msg){
+                if(msg=='1'){
+                    bol = true;
+                }else{
+                    ShowErrmsg("短信验证码错误");
+                }
+            }
+        });
+        return bol;
+    }
+</script>
+
+
+
+<footer>
+    <div>
+        三峡农商银行版权所有 ICP许可证号&nbsp;鄂B2-20040497
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,39 @@
+
+@font-face {font-family: "iconfont";
+  src: url('http://www.sanxb.net/data/template/default/css/fonts/iconfont.eot');  /*IE9*/
+  src: url('http://www.sanxb.net/data/template/default/css/fonts/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('http://www.sanxb.net/data/template/default/css/fonts/iconfont.woff') format('woff'),
+  url('http://www.sanxb.net/data/template/default/css/fonts/iconfont.ttf') format('truetype'),
+  url('http://www.sanxb.net/data/template/default/css/fonts/iconfont.svg#awesome') format('svg');
+}
+
+.iconfont {
+  font-family:"awesome" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-chaxun:before { content: "\e604"; }
+.icon-xingzhuang13:before { content: "\e612"; }
+.icon-xiangmushenbao:before { content: "\e6f8"; }
+.icon-fanhui:before { content: "\e64b"; }
+.icon-xia:before { content: "\e634"; }
+.icon-shang:before { content: "\e633"; }
+.icon-chongzhi:before { content: "\f029c"; }
+.icon-kehuliebiao:before { content: "\e8f8"; }
+.icon-renwu:before { content: "\e63c"; }
+.icon-renwu1:before { content: "\e863"; }
+.icon-nongye:before { content: "\e617"; }
+.icon-icon32204:before { content: "\e609"; }
+.icon-shequ:before { content: "\e670"; }
+.icon-loudong:before { content: "\e615"; }
+.icon-huiyuanzhongxin:before { content: "\e60b"; }
+.icon-daikuan:before { content: "\e62b"; }
+.icon-liuchengpeizhiicon01:before { content: "\e601"; }
+.icon-fanhui1:before { content: "\e62d"; }
+.icon{color:#666}
+.vip{font-size:24px;}
+.daohangtubiao{font-size:28px;color:#fff}
+.viewicon{font-size:20px !important;font-weight:100;top:13px !important}

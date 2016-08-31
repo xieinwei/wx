@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>金融信息</title>
+    <link type="text/css" href="css/red.css" rel="stylesheet">
+    <script type="text/javascript" src="js/zepto.js"></script>
+    <style>
+        body{ background:url(images/nav_bg.jpg) no-repeat; background-size:100%;}
+        .infobtn{float:left;width:27%;margin:0 3%; }
+        .infobtn input{height:80px;width:100%;border:none; line-height:120px;border-radius:10px;}
+        .infobtn input.ll{ background:#fff url(images/lilv.png) center 15px no-repeat; background-size:30px 30px;}
+        .infobtn input.wd{ background:#fff url(images/wangdian.png) center 15px no-repeat; background-size:30px 30px;}
+    </style>
+</head>
+<body>
+    <header id="nav">
+        <div class="nav_in">
+            <section id="headnav" style="z-index:9999">
+                <div class="nav_back">
+                    <i class="icon iconfont fanhui"><</i>
+                    <a href="index.html" class="prepage" id="lnkBack">首 页</a>
+                </div>
+            </section>
+
+            <section style="position:relative">
+                <span style="text-align:center;font-size:18px">金融信息</span>
+            </section>
+        </div>
+    </header>
+    <div class="infobtn">
+        <a href="query.html">
+            <div><input class="wd" type="submit" value="网点查询" onClick="javascript:return ChecePage();">
+            </div>
+        </a>
+    </div>
+
+    <div class="infobtn">
+        <a href="account.html">
+            <div><input class="wd" type="submit" value="我的帐户" onClick="javascript:return ChecePage();">
+            </div>
+        </a>
+    </div>
+
+
+
+
+
+    <footer style="position:fixed;bottom:10px;">
+        <div>
+            三峡农商银行版权所有 ICP许可证号&nbsp;鄂B2-20040497
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>在線貸款</title>
+    <link type="text/css" href="css/red.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+
+    <style type="text/css">
+        .tab_con{ display:none;}
+        .tabs span{ background-color:#0052ae; display: block;}
+        .tabs span a {display:inline-block; outline: none; text-decoration:none; border:1px solid #fff;}
+        .tabs .thistab{background-color:#fff;color:#0052ae;}
+        .agree_check{ width:25px; height:25px; background: transparent url(images/checkbox.png) no-repeat scroll 0 -54px;}
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            jQuery.jqtab = function(tabtit,tabcon) {
+                $(tabcon).hide();
+                $(tabtit+" span:first").addClass("thistab").show();
+                $(tabcon+":first").show();
+                $("#formtabname").attr('value','tab1');
+                $(tabtit+" span").click(function() {
+                    $(tabtit+" span").removeClass("thistab");
+                    $(this).addClass("thistab");
+                    $(tabcon).hide();
+                    var activeTab = $(this).find("a").attr("tab");
+                    $("#formtabname").attr('value',activeTab);//把formtabname赋值 以确认当前显示哪个模板tab
+                    $("#"+activeTab).fadeIn();
+                    return false;
+                });
+            };
+            /*调用方法如下：*/
+            $.jqtab("#tabs",".tab_con");
+        });
+    </script>
+</head>
+<body>
+<header id="nav">
+    <div class="nav_in">
+        <section id="headnav">
+            <div class="nav_back"> <i class="icon iconfont fanhui"><</i>
+                <a href="javascript:history.go(-1);" class="prepage" id="lnkBack">返 回</a>
+            </div>
+        </section>
+        <section id="tabs" class="tabs">
+                <span tab="tab1" class="tab_current" style="height:27px;line-height:26px;">
+                    <a tab="tab1">个人贷款</a>
+                </span>
+                <span tab="tab2" class="tab_qy" style="height:27px;line-height:26px;margin-left:-6px">
+                    <a tab="tab2">企业贷款</a>
+                </span>
+        </section>
+        <!--section>
+        <img alt="" width="31px" height="31px" border="0" src="images/LOGO.png"></section-->
+    </div>
+</header>
+<div id="tabbox">
+    <div></div>
+
+    <div style="display:none;">
+        <img src="./在线申请贷款_files/lc.jpg" width="100%"></div>
+
+    <section class="consection" style="padding:10px;line-height: 23px; display:none;">
+        <h3 style="font-size:14px; font-weight:bold; text-align:center;">三峡农商银行信用卡（个人卡）</h3>
+        明星信用卡，招行粉丝的最爱！
+        <br>
+        1）预借现金 随地可取
+        <br>
+        2）万家商户 优遍天下
+        <br>
+        3）积分永久有效
+        <br>4）五重安全保障</section>
+    <div style="display:none">
+    </div>
+
+    <form name="personal" method="post" action="http://www.sanxb.net/index.php/shendai/doposttab" id="personaltab">
+        <!--div style="margin:17px 1px 0; font-size:14px; text-align:center;display:;">您正在申请的是农商银行信用卡</div-->
+        <div class="conlock">您的资料将采用加密技术传输，请放心填写。</div>
+        <!--****** 个人贷款begin**************-->
+        <section class="consection tab_con" id="tab1" style="display: block;">
+            <input type="hidden" name="type" id="type" value="personal">
+
+            <div class="incondiv cardid" id="NotNewDiv" style="display:none;">
+                <div class="conmsg" id="topconmsg"> <em>!</em>
+                    抱歉，您是已持卡客户，暂不能通过手机申请，请使用电脑登陆我行官网办理。
+                </div>
+            </div>
+
+            <div class="incondiv cardid" style="border-top:0;display:none;">
+            <span> <i>*</i>
+                姓名：
+            </span>
+                <div>
+                    <input name="realname" type="text" id="realname" value="李俊松" maxlength="12"></div>
+            </div>
+
+            <div class="incondiv cardid" style="display:none;">
+            <span>
+                <i>*</i>
+                身份证号：
+            </span>
+                <div>
+                    <input name="cardid" type="text" id="cardid" value="500243199509194573" maxlength="18" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="incondiv cardid" style="display:none;">
+            <span>
+                <i>*</i>
+                性别：
+            </span>
+                <div>
+                    <input name="sex" type="radio" value="男" checked="" style="width:16px">男
+                    <input name="sex" type="radio" value="女" style="width:16px">女
+                </div>
+            </div>
+
+            <div class="incondiv cardtype">
+			<span>
+				<i>*</i>
+				请选择区域：
+			</span>
+                <div>
+
+                    <select id="area" name="area" style="color:#999;" onChange="changbank()">
+                        <option value="">请选择所在区域</option>
+                        <option value="39">伍家岗区</option>
+                        <option value="53">枝江市</option>
+                        <option value="42">西陵区</option>
+                        <option value="45">点军区</option>
+                        <option value="47">猇亭区</option>
+                        <option value="49">高新开发区</option>
+                        <option value="51">夷陵区</option>
+                        <option value="110">宜都市</option>
+                        <option value="131">当阳市</option>
+                        <option value="156">远安县</option>
+                        <option value="169">兴山县</option>
+                        <option value="180">秭归县</option>
+                        <option value="196">长阳县</option>
+                        <option value="217">五峰县</option>
+                        <option value="242">武汉市</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+            <div class="incondiv cardtype">
+			<span style="">
+				<i style="color:red;">*</i>
+				请选择服务行：
+			</span>
+                <div>
+                    <select id="bank" name="bank" style="color:#999;">
+                        <option value="">请选择支行</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="incondiv cardid" id="haskadiv" style="display:none;">
+                <div class="conmsg"> <em>!</em>
+                    抱歉，该区域未开通上门办卡服务，请前往我行网点尝试办理。
+                </div>
+            </div>
+
+            <!-- 用户直接点击申贷 -->
+            <div class="incondiv cardtype" style="display:none;">
+				<span>
+					<i>*</i>
+					请选择贷款类型：
+				</span>
+                <div>
+                    <select id="protype" name="protype" style="color:#999;">
+                        <option value="0" selected="">无</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="incondiv cardtype" style="display:none;">
+			<span>
+				<i>*</i>
+				贷款产品：
+			</span>
+                <div>
+                    <select name="prouductname" id="prouductname" style="color:#999;">
+                        <option value="无" selected="">无</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="incondiv cardid">
+		<span>
+			<i>*</i>
+			贷款金额：
+		</span>
+                <div>
+                    <input name="valueofloan" type="text" id="valueofloan" maxlength="5" onChange="changeDX1()" onKeyUp="changeDX1()"></div>
+                <div style="padding-right:5px;-webkit-box-flex: 0; width:40px;" id="DivSMSBtn">
+                    万元
+                </div>
+            </div>
+
+            <div class="incondiv cardid" style="display:block;">
+                <span><i>*</i>大写金额：</span>
+                <div class="conmsg " style="text-align:left;" id="daxiemsg1">
+                </div>
+            </div>
+
+            <!-- 用户直接点击申贷 -->
+
+            <div class="incondiv cardtype">
+				<span>
+					<i>*</i>
+					贷款用途：
+				</span>
+                <div>
+                    <select id="loanuse" name="loanuse" style="color:#999;">
+                        <option value="消费">消费</option>
+                        <option value="流动性资金">流动性资金</option>
+                        <option value="抗洪救灾重建家园">抗洪救灾重建家园</option>
+                        <option value="抗洪救灾恢复生产">抗洪救灾恢复生产</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="incondiv cardtype">
+			<span>
+				<i>*</i>
+				贷款期限：
+			</span>
+                <div>
+                    <!--
+                        <input name="timelimit" type="text" id="timelimit" maxlength="80">
+                    -->
+                    <select id="timelimit" name="timelimit" style="color:#999;">
+                        <option value="6个月及以下">6个月及以下</option>
+                        <option value="1年">1年</option>
+                        <option value="2年">2年</option>
+                        <option value="3年">3年</option>
+                        <option value="5年及以上">5年及以上</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="incondiv cardid">
+		<span>
+			<i>*</i>
+			详细地址：
+		</span>
+                <div>
+                    <input name="address" type="text" id="address" maxlength="24"></div>
+            </div>
+
+            <div class="incondiv cardid" style="display:none;">
+            <span>
+                <i>*</i>
+                联系手机号：
+            </span>
+                <div>
+                    <input name="mobile" type="text" id="mobile" value="18332737107" maxlength="11" pattern="[0-9]*"></div>
+                <!--div style="padding-right:5px;-webkit-box-flex: 0; width:90px;" id="DivSMSBtn">
+                <input type="button" id="btnNewSendSMS" value="获取验证码" onclick="SMSCodeCheck()" style="font-size:14px;"></div-->
+            </div>
+
+
+        </section>
+        <!--************ 个人贷款end***********-->
+    </form>
+
+
+
+
+
+
+
+
+
+
+    <form name="company" method="post" action="http://www.sanxb.net/index.php/shendai/doposttab" id="companytab">
+        <!--******** 公司贷款begin************-->
+        <section class="consection tab_con" id="tab2" style="display: none;">
+            <input type="hidden" name="type" id="type2" value="company">
+
+            <div class="incondiv cardid" style="border-top:0">
+            <span>
+    <i>*</i>
+    公司名称：
+</span>
+                <div>
+                    <input name="companyname" id="companyname2" type="text" maxlength="12">
+                </div>
+            </div>
+
+            <div class="incondiv cardid">
+            <span>
+			<i>*</i>
+			公司地址：
+			</span>
+                <div>
+                    <input name="address" type="text" id="address2" maxlength="24">
+                </div>
+            </div>
+
+            <div class="incondiv cardid" style="display:none;">
+            <span>
+    <i>*</i>
+    联系人姓名：
+</span>
+                <div>
+                    <input name="realname" type="text" id="realname2" value="李俊松" maxlength="12">
+                </div>
+            </div>
+
+
+            <div class="incondiv cardid" style="display:none;">
+            <span>
+    <i>*</i>
+    身份证号：
+</span>
+                <div>
+                    <input name="cardid" type="text" id="cardid2" maxlength="18" value="500243199509194573" autocomplete="off">
+                </div>
+            </div>
+            <div class="incondiv cardid"  style="display:none;">
+                <div class="conmsg" >
+                    <em>!</em> 抱歉，您是已持卡客户，暂不能通过手机申请，请使用电脑登陆我行官网办理。
+                </div>
+            </div>
+
+
+            <div class="incondiv cardid" style="display:none;">
+            <span>
+    <i>*</i>
+    手机号：
+</span>
+                <div>
+                    <input name="mobile" type="text" id="mobile2" value="18332737107" maxlength="11" pattern="[0-9]*">
+                </div>
+                <!--div style="padding-right:5px;-webkit-box-flex: 0; width:90px;" id="DivSMSBtn">
+    <input type="button" id="btnNewSendSMS" value="获取验证码" onclick="SMSCodeCheck()" style="font-size:14px;"></div-->
+            </div>
+            <!--div id="ctMSCode" class="incondiv cardid">
+    <span>
+    <i>*</i>
+    短信验证码：
+    </span>
+    <div>
+    <input name="cttbxSMSCode" type="text" id="ctlxSMSCode" maxlength="6" pattern="[0-9]*"></div>
+    </div-->
+            <div class="incondiv cardtype">
+            <span>
+<i>*</i>
+请选择区域：
+</span>
+                <div>
+                    <select id="area2" name="area" style="color:#999;" onChange="changbank2()">
+                        <option value="">请选择所在区域</option>
+                        <option value="39">伍家岗区</option>
+                        <option value="53">枝江市</option>
+                        <option value="42">西陵区</option>
+                        <option value="45">点军区</option>
+                        <option value="47">猇亭区</option>
+                        <option value="49">高新开发区</option>
+                        <option value="51">夷陵区</option>
+                        <option value="110">宜都市</option>
+                        <option value="131">当阳市</option>
+                        <option value="156">远安县</option>
+                        <option value="169">兴山县</option>
+                        <option value="180">秭归县</option>
+                        <option value="196">长阳县</option>
+                        <option value="217">五峰县</option>
+                        <option value="242">武汉市</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="incondiv cardtype">
+            <span style="">
+			<i style="color:red;">*</i>
+			请选择服务行：
+			</span>
+                <div>
+                    <select id="bank2" name="bank" style="color:#999;">
+                        <option value="">请选择支行</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="incondiv cardid" style="display:none;">
+                <div class="conmsg">
+                    <em>!</em> 抱歉，该区域未开通上门办卡服务，请前往我行网点尝试办理。
+                </div>
+            </div>
+            <div class="incondiv cardtype">
+            <span>
+			<i>*</i>
+			职务：
+			</span>
+                <div>
+                    <select name="title" id="title2" style="color:#999; background-color:Transparent;">
+                        <option value="">请选择</option>
+                        <option value="管理人员">管理人员</option>
+                        <option value="管理人员">财务</option>
+                        <option value="管理人员">员工</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 用户直接点击申贷 -->
+            <div class="incondiv cardtype" style="display:none;">
+            <span>
+                <i>*</i>
+                请选择贷款类型：
+            </span>
+                <div>
+                    <select id="protype2" name="protype2" style="color:#999;">
+                        <option value="无">无</option>
+                    </select>
+                </div>
+            </div>
+            <div class="incondiv cardtype" style="display:none;">
+            <span>
+			<i>*</i>
+			贷款产品：
+			</span>
+                <div>
+                    <select name="prouductname" id="prouductname2" style="color:#999;">
+                        <option value="无">无</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="incondiv cardid">
+            <span>
+			<i>*</i>
+			贷款金额：
+			</span>
+                <div>
+                    <input name="valueofloan" type="text" id="valueofloan2" maxlength="5" onChange="changeDX2()" onKeyUp="changeDX2()">
+                </div>
+                <div style="padding-right:5px;-webkit-box-flex: 0; width:40px;" id="DivSMSBtn">
+                    万元
+                </div>
+            </div>
+            <div class="incondiv cardid" style="display:blank;">
+            <span>
+			<i>*</i>
+			大写金额：
+			</span>
+                <div class="conmsg " style="text-align:left;" id="daxiemsg2">
+                </div>
+            </div>
+
+
+
+            <!-- 用户直接点击申贷 -->
+            <div class="incondiv cardtype">
+			<span>
+				<i>*</i>
+				贷款用途：
+			</span>
+                <div>
+                    <select id="loanuse2" name="loanuse" style="color:#999;">
+                        <option value="消费">消费</option>
+                        <option value="流动性资金">流动性资金</option>
+                        <option value="抗洪救灾重建家园">抗洪救灾重建家园</option>
+                        <option value="抗洪救灾恢复生产">抗洪救灾恢复生产</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="incondiv cardtype">
+		<span>
+			<i>*</i>
+			贷款期限：
+		</span>
+                <div>
+                    <select id="timelimit2" name="timelimit" style="color:#999;line-height:30px;height:30px;margin:5px auto;">
+                        <option value="6个月及以下">6个月及以下</option>
+                        <option value="1年">1年</option>
+                        <option value="2年">2年</option>
+                        <option value="3年">3年</option>
+                        <option value="5年及以上">5年及以上</option>
+                    </select>
+                </div>
+            </div>
+
+        </section>
+        <section class="agreement" style="display:blank;">
+            <div>注：贷款用途项“消费”指个人消费类用途，“流动性资金”指经营性质类用途。
+            </div>
+
+        </section>
+
+        <!-- 公司贷款end*****-->
+    </form>
+
+    <section class="agreement" style="display:none;">
+        <div>我已阅读并清楚知晓<a href="javascript:void(0);" target="_self">《三峡农商银行贷款章程》</a>及相关信息，并愿意遵守各项规则。
+        </div>
+        <div><input class="agree_check" name="agree_check" id="agree_check" checked="false" onClick="changecheckbox();" type="checkbox"></div>
+    </section>
+    <div class="conmsg" id="errmsg" style="display:none;">
+        <em>!</em>
+    </div>
+    <section class="newapplybtn" style="margin-top:10px;">
+        <div class="bottombtn">
+            <div>
+                <input type="submit" name="submit1" value="提交" onClick="javascript:return ChecePage();" id="submit1"></div>
+        </div>
+    </section>
+
+</div>
+
+<!--重要按钮 防止重复提交按钮 显示哪张表单按钮-->
+<input type="hidden" id="repeatform" name="repeatform" value="274247">
+<input type="hidden" id="formtabname" name="formtabname" value="tab1">
+<script type="text/javascript">
+    //小写转换大写
+    var DX = function (num){
+        var strOutput = "";
+        var strUnit = '仟佰拾亿仟佰拾万仟佰拾元角分';
+        num += "00";
+        var intPos = num.indexOf('.');
+        if (intPos >= 0)
+            num = num.substring(0, intPos) + num.substr(intPos + 1, 2);
+        strUnit = strUnit.substr(strUnit.length - num.length);
+        for (var i=0; i < num.length; i++)
+            strOutput += '零壹贰叁肆伍陆柒捌玖'.substr(num.substr(i,1),1) + strUnit.substr(i,1);
+        return strOutput.replace(/零角零分$/, '整').replace(/零[仟佰拾]/g, '零').replace(/零{2,}/g, '零').replace(/零([亿|万])/g, '$1').replace(/零+元/, '元').replace(/亿零{0,3}万/, '亿').replace(/^元/, "零元");
+    };
+    //alert(DX(845446545));
+
+    //转换大写
+    function changeDX1(){
+        var loanamount =parseFloat($.trim($("#valueofloan").val()))*10000;
+        var capital=DX(loanamount);
+        //$("#capital").attr('value',capital);
+        $("#daxiemsg1").html("" + capital);
+    }
+    //转换大写
+    function changeDX2(){
+        var loanamount =parseFloat($.trim($("#valueofloan2").val()))*10000;
+        var capital=DX(loanamount);
+        //$("#capital").attr('value',capital);
+        $("#daxiemsg2").html("" + capital);
+    }
+
+    function changbank(){
+        if($("#area").val() !=""){
+            $.getJSON("http://www.sanxb.net/index.php/api/loan/getbank",{id:$("#area").val()},function(json){
+                var smallname = $("#bank");
+                $("option",smallname).remove(); //清空原有的选项
+                smallname.append('<option value="">请选择支行</option>');
+                $.each(json,function(index,array){
+                    var option = "<option value='"+array['id']+"'>"+array['name']+"</option>";
+                    smallname.append(option);
+                });
+            });
+        }else{
+            $("option",smallname).remove(); //清空原有的选项
+
+        }
+    }
+
+    function changbank2(){
+        if($("#area2").val() !=""){
+            $.getJSON("http://www.sanxb.net/index.php/api/loan/getbank",{id:$("#area2").val()},function(json){
+                var smallname = $("#bank2");
+                $("option",smallname).remove(); //清空原有的选项
+                smallname.append('<option value="">请选择支行</option>');
+                $.each(json,function(index,array){
+                    var option = "<option value='"+array['id']+"'>"+array['name']+"</option>";
+                    smallname.append(option);
+                });
+            });
+        }else{
+            $("option",smallname).remove(); //清空原有的选项
+        }
+    }
+
+
+    function changprotype(){
+        if($("#protype").val() !=""){
+            $.getJSON("http://www.sanxb.net/index.php/api/loan/getpro",{id:$("#protype").val()},function(json){
+                var smallname = $("#prouductname");
+                $("option",smallname).remove(); //清空原有的选项
+                $.each(json,function(index,array){
+                    var option = "<option value='"+array['title']+"'>"+array['title']+"</option>";
+                    smallname.append(option);
+                });
+            });
+        }else{
+            $("option",smallname).remove();//清空原有的选项
+        }
+    }
+
+    function changprotype2(){
+        if($("#protype2").val() !=""){
+            $.getJSON("http://www.sanxb.net/index.php/api/loan/getpro",{id:$("#protype2").val()},function(json){
+                var smallname = $("#prouductname2");
+                $("option",smallname).remove(); //清空原有的选项
+                $.each(json,function(index,array){
+                    var option = "<option value='"+array['title']+"'>"+array['title']+"</option>";
+                    smallname.append(option);
+                });
+            });
+        }else{
+            $("option",smallname).remove();//清空原有的选项
+        }
+    }
+    changbank();
+    changbank2();
+    changprotype();
+    changprotype2();
+
+    function addcookie(cstr){
+        var date = new Date();
+        date.setTime(date.getTime() + 300 * 1000);
+        document.cookie = cstr + ";expires=" + date.toGMTString();
+    }
+
+    function getcookie(cstr){
+        var strcookie = document.cookie;
+        if (null != strcookie && "" != strcookie) {
+            var arrcookie = strcookie.split(";");
+            for (var i = 0; i < arrcookie.length; i++) {
+                var arr = arrcookie[i].split("=");
+                if (0 == arr[0].indexOf(" ")) {
+                    arr[0] = arr[0].substr(1);
+                }
+                if (cstr == arr[0]) {
+                    return unescape(arr[1]);
+                }
+            }
+        }
+        return "";
+    }
+
+    function deletecookie(cstr){
+        var date = new Date();
+        date.setTime(date.getTime() - 100000);
+        document.cookie = cstr + ";expire=" + date.toGMTString();
+    }
+
+    function ShowErrmsg(errmsg) {
+        $("#errmsg").show();
+        $("#errmsg").html("<em>!</em>" + errmsg);
+    }
+
+    //验证身份证
+    function isCardNo(card){
+        // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (reg.test(card) === false) {
+            return false;
+        }
+        return true;
+    }
+    //验证姓名
+    function isChinese(s){
+        var patrn = /^\s*[\u4e00-\u9fa5]{1,15}\s*$/;
+        if (!patrn.exec(s)) {
+            return false;
+        }
+        return true;
+    }
+    //校验手机号码：必须以数字开头 已废弃 18开头有BUG
+    function isMobile(s){
+        var patrn = /^\s*(15\d{9}|13[0-9]\d{8})\s*$/;
+        if (!patrn.exec(s)) {
+            return false;
+        }
+        return true;
+    }
+    // 验证手机号码
+    function isPhone(num) {
+        // 小于11位 false
+        if (num.length < 11) return false;
+        var phoneMatch = /^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8]))\d{8}$/;
+        if (phoneMatch.test(num)) return true;
+        return false;
+    }
+    //数字
+    function isNumber(s) {
+        var patrn = /^\s*\d+\s*$/;
+        //var patrn1=/^\s*\d{16}[\dxX]{2}\s*$/;
+        if (!patrn.exec(s)) {
+            return false;
+        }
+        return true;
+    }
+</script>
+<script type="text/javascript">
+    function ChecePage() {
+        var sbtab = $("#formtabname").val()
+        // alert($("#agree_check").attr("checked"));
+        if (sbtab == "tab1") {
+            var type = $.trim($("#type").val());
+            var realname = $.trim($("#realname").val());
+            var cardid = $.trim($("#cardid").val());
+            var mobile = $.trim($("#mobile").val());
+            var area = $.trim($("#area").val());
+            var bank = $.trim($("#bank").val());
+            var prouductname = $.trim($("#prouductname").val());
+            var valueofloan = $.trim($("#valueofloan").val());
+            var address = $.trim($("#address").val());
+            var timelimit  = $.trim($("#timelimit").val());//贷款期限
+            var loanuse  = $.trim($("#loanuse").val());//贷款用途
+            var smscode = $.trim($("#smscode").val());
+            if (!isChinese(realname)) {
+                ShowErrmsg("请输入正确的姓名。");
+                return false;
+            }else if (!isCardNo(cardid)) {
+                ShowErrmsg("请输入正确的身份证号。");
+                return false;
+            }else if (area == "") {
+                ShowErrmsg("请选择区域。");
+                return false;
+            }else if (bank == "") {
+                ShowErrmsg("请选择服务行。");
+                return false;
+            }else if (prouductname == "") {
+                ShowErrmsg("请选择产品名称。");
+                return false;
+            }else if (valueofloan == "") {// 可能验证isNaN
+                ShowErrmsg("请输入贷款金额。");
+                return false;
+            } else if (loanuse == "") {
+                ShowErrmsg("请输入贷款用途。");
+                return false;
+            } else if (timelimit == "") {
+                ShowErrmsg("请输入贷款期限。");
+                return false;
+            }else if (address == ""){
+                ShowErrmsg("地址不能为空。");
+                return false;
+            } else if (!isPhone(mobile)) {
+                ShowErrmsg("请输入正确的手机号。");
+                return false;
+            }
+            $("#submit1").attr('disabled',"disabled");
+            $("#personaltab").submit();
+            return true;
+        } else if (sbtab == "tab2") {
+            var type = $.trim($("#type2").val());
+            var companyname = $.trim($("#companyname2").val());
+            var realname = $.trim($("#realname2").val());
+            var cardid = $.trim($("#cardid2").val());
+            var mobile = $.trim($("#mobile2").val());
+            var area = $.trim($("#area2").val());
+            var bank = $.trim($("#bank2").val());
+            var title = $.trim($("#title2").val());
+            var prouductname = $.trim($("#prouductname2").val());
+            var valueofloan = $.trim($("#valueofloan2").val());//贷款金额
+            var address = $.trim($("#address2").val());
+            var smscode = $.trim($("#smscode2").val());
+            var timelimit  = $.trim($("#timelimit2").val());//贷款期限
+            var loanuse  = $.trim($("#loanuse2").val());//贷款用途
+            if (companyname == "") {
+                ShowErrmsg("公司不能为空。");
+                return false;
+            } else if (address == "") {
+                ShowErrmsg("地址不能为空。");
+                return false;
+            }/* else if (!isChinese(realname)) {
+             ShowErrmsg("请输入正确的姓名。");
+             return false;
+             } else if (!isCardNo(cardid)) {
+             ShowErrmsg("请输入正确的身份证号。");
+             return false;
+             } else if (!isPhone(mobile)) {
+             ShowErrmsg("请输入正确的手机号。");
+             return false;
+             }*/ else if (area == "") {
+                ShowErrmsg("请选择区域。");
+                return false;
+            } else if (bank == "") {
+                ShowErrmsg("请选择服务行。");
+                return false;
+            } else if (title == "") {
+                ShowErrmsg("请选择您的职务");
+                return false;
+            } else if (prouductname == ""){
+                ShowErrmsg("请选择产品名称。");
+                return false;
+            } else if (valueofloan == "") {//isNaN
+                ShowErrmsg("请输入贷款金额。");
+                return false;
+            } else if (loanuse == "") {
+                ShowErrmsg("请输入贷款用途。");
+                return false;
+            } else if (timelimit == "") {
+                ShowErrmsg("请输入贷款期限。");
+                return false;
+            }
+            $("#submit1").attr('disabled',"disabled");
+            $("#companytab").submit();
+            return true;
+        }
+    }
+</script>
+
+<footer>
+    <div>三峡农商银行版权所有 ICP许可证号&nbsp;鄂B2-20040497</div>
+</footer>
+</body>
+</html>

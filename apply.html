@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>申請流程</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link type="text/css" href="css/red.css" rel="stylesheet">
+    <link type="text/css" href="css/zzsc.css" rel="stylesheet">
+    <style>
+
+        .dklist{padding:10px; margin:10px;background:rgba(255,255,255,1);z-index:-1}
+        .dklist p{ line-height:35px;color:#333; font-size:14px;}
+        .dklist red{ color:#F00}
+        .dklist table{border-collapse: collapse;/* 边框合并属性*/ color:#333; font-size:14px;}
+        .dklist table tr td{border: 1px solid #ddd; padding:5px}
+        .dklist input{ padding:8px 0; width:100% ; margin-top:10px;border:none; background:#ddd;color:#999}
+        .dklist .chexiao{background:#4e9be3;color:#fff}
+        .dklist .shenbao{background:#ec6941;color:#fff}
+    </style>
+</head>
+<body>
+<header id="nav">
+    <div class="nav_in">
+        <section id="headnav">
+
+            <div class="nav_back">
+                <i class="icon iconfont fanhui"><</i>
+                <a href="javascript:history.go(-1);" class="prepage" id="lnkBack">
+                    返 回</a>
+            </div>
+
+        </section>
+        <section>
+            <span style="text-align:center;font-size:18px">申贷进度</span>
+        </section>
+    </div>
+</header>
+<div class="dklist">
+    <form id="msform">
+        <ul id="progressbar">
+            <li class="active">提交</li>
+            <li class="active">受理</li>
+            <li class="active">调查</li>
+            <li class="active">审查</li>
+            <li>审批</li>
+            <li>放贷</li>
+            <li>偿还</li>
+        </ul>
+    </form>
+    <div style="display:none">
+    </div>
+
+
+    <p>贷款单号：<red>201608314855984852</red></p>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody><tr>
+            <td width="26%">贷款金额</td>
+            <td width="74%">1万</td>
+        </tr>
+        <tr>
+            <td>申请时间：</td>
+            <td>2016-08-31 11:04:48</td>
+        </tr>
+
+        <tr>
+            <td>客户经理：</td>
+            <td>
+                曾晖    </td>
+        </tr>
+        <tr>
+            <td>联系电话：</td>
+            <td>
+                13886714720    </td>
+        </tr>
+
+
+        <!--
+      1-通过、拒绝
+      2-通过、拒绝、超权限
+      3-完成签订合同
+
+      1=同过
+      2=拒绝
+      3=超权限
+      4=完成，签订合同
+        -->
+
+        <tr>
+            <td>审批结果：</td>
+            <td>
+                <red>
+                    审核中    </red>
+            </td>
+        </tr>
+        <tr>
+            <td>备注：</td>
+            <td></td>
+        </tr>
+        </tbody></table>
+    <input type="submit" value="审核中"></div>
+
+
+
+<footer>
+    <div>
+        三峡农商银行版权所有 ICP许可证号&nbsp;鄂B2-20040497
+    </div>
+</footer>
+</body>
+</html>
